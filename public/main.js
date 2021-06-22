@@ -22,7 +22,7 @@ function getSetFlowType(){
     if(window.localStorage.getItem('flowType')){
         let value = window.localStorage.getItem('flowType');
         flowType.val(value)
-        appInit.show('slow');
+        appInit.show();
     }
     else{
         flowType.val('');
