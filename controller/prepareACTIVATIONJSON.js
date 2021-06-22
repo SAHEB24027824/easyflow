@@ -59,17 +59,39 @@
     let NonCarrierFeatureList= {
         "Lines": []
     }
+
+let activationArrayData=[];
+let orderDetaildObj={};
+function setActivationData(arrayData){
+    if(Array.isArray(arrayData)){
+        arrayData.forEach(order=>{
+
+           if(order.OrderDetails){
+            orderDetaildObj.OrderDetails=order.OrderDetails
+           }
+           if(order.AccountDetails){
+            orderDetaildObj.AccountDetails=order.AccountDetails
+           }
+           if(order.AccountLines){
+            orderDetaildObj.AccountLines=order.AccountLines
+           }
+           if(order.Fulfillment){
+            orderDetaildObj.Fulfillment=order.Fulfillment
+           }
+           if(order.Payment){
+            orderDetaildObj.Payment=order.Payment
+           }
+
+           activationArrayData.push(orderDetaildObj);
+        })
+
+        return activationArrayData;
+    }
+}
 function prepareActJSON(data,sessionId) {
     let resData={
         "SessionId": sessionId,
-        "OrderActivationInfo": {
-        "OrderDetails":data.OrderDetails,
-        "AccountDetails":data.AccountDetails,
-        "AccountLines":data.AccountLines,
-        "Fulfillment":Fulfillment,
-        "Payment":Payment,
-        "NonCarrierFeatureList":NonCarrierFeatureList
-        },
+        "OrderActivationInfo": setActivationData(data.PlanFeaturesEndData),
         "RequestIdentifier": null,
         "ReferenceIdentifier": null
     }
