@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Select Flow Type <span class="text text-danger">**</span></label>
+      <select class="form-control flowType">
+        <option disabled selected value>--Select Flow ---</option>
+        <option value="ecom">Ecom</option>
+        <option value="retail">Retail</option>
+      </select>
+    </div>
+    <div class="appInit">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">SessionId<span class="text text-danger">**</span></label>
+          <input type="email" class="form-control" id="sessionId" aria-describedby="emailHelp" placeholder="Session ID">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Token<span class="text text-danger">**</span></label>
+          <textarea class="form-control" id="token" placeholder="Token" rows="4"></textarea>
+        </div>
+      </form>
+
+      <p class="text text-center text-primary link" onclick="openLink('PREQUAL')">STEP-1 Load QUAL Flow</p>
+      <p class="text text-center">Finish the QUAL Flow then click Get PNF start data button</p>
+
+      <button class="btn btn-success cuBTN" id="pnfGetBTN"><span
+          class="spinner-border spinner-border-sm displayNone"></span>
+        Get PNF start data</button>
+
+      <button class="btn btn-info cuBTN" id="pnfPOSTBTN"><span
+          class="spinner-border spinner-border-sm displayNone"></span>
+        POST PNF start data</button>
+      <p class="text text-center text-primary link" id="PNFLink" onclick="openLink('PLANSFEATURES')">STEP-2 Load
+        PLANSFEATURES Flow</p>
+      <p class="text text-center text-primary link" id="VZWTCLink" onclick="openLink('VZWTC')">STEP-3 Load VZWTC Flow
+      </p>
+
+
+      <p class="text text-center text-info text-sm" id="text1">Finish the PLANSFEATURES and VZWTC Flow then click Get
+        GET ACTIVATION start data button</p>
+
+      <button class="btn btn-success cuBTN" id="getActivation"><span
+          class="spinner-border spinner-border-sm displayNone"></span>
+        GET ACTIVATION start data</button>
+
+      <form class="form">
+      </form>
+
+      <button class="btn btn-info cuBTN" id="postActivation"><span
+          class="spinner-border spinner-border-sm displayNone"></span>
+        POST ACTIVATION start data</button>
+      <p class="text text-center text-primary link" id="ACTIVATIONLink" onclick="openLink('ACTIVATION')">STEP-3 Load
+        ACTIVATION Flow</p>
+      <p class="text text-center text-primary link" id="ACTIVATIONLink1" onclick="openLink('ACTIVATION-DAY1')">STEP-3
+        Load ACTIVATION DFILL DAY 1 Flow</p>
+      <p class="text text-center text-primary link" id="ACTIVATIONLink2" onclick="openLink('ACTIVATION-DAY2')">STEP-3
+        Load ACTIVATION DFILL DAY 2 Flow</p>
+
+
+
+      <div class="editor-container ">
+        <div id="pnf-editor" class="editor"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-warning clear">Reset</button>
+  </div>
+
+
+
+
+  <script src="./lib/ace.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
