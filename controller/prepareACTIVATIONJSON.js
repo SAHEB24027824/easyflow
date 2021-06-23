@@ -95,6 +95,7 @@ function prepareActJSON(data,sessionId) {
         "RequestIdentifier": null,
         "ReferenceIdentifier": null
     }
+     activationArrayData=[];
     return resData;
 }
 

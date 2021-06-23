@@ -120,8 +120,17 @@ function postPNF(data) {
         "PlanFeaturesStartData":PlanFeaturesStartData,
         "ReferenceIdentifier": null
     }
-  
+     PlanFeaturesStartData=[];
     return  resData;
 }
 
 module.exports=postPNF;
+
+
+
+
+$('#model-ok-btn').click(function(){
+    $('#modalid').modal('hide'); 
+})
+
+
