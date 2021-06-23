@@ -127,10 +127,3 @@ function postPNF(data) {
 module.exports=postPNF;
 
 
-
-
-$('#model-ok-btn').click(function(){
-    $('#modalid').modal('hide'); 
-})
-
-
