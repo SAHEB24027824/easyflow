@@ -89,9 +89,10 @@ let Sim = {
 
 
 
-let PlanFeaturesStartData=[];
 
 function preapareData(arrayData){
+
+    let PlanFeaturesStartData=[];
     
     if(Array.isArray(arrayData)){
         arrayData.forEach(order=>{
@@ -120,7 +121,7 @@ function postPNF(data) {
         "PlanFeaturesStartData":PlanFeaturesStartData,
         "ReferenceIdentifier": null
     }
-     PlanFeaturesStartData=[];
+
     return  resData;
 }
 

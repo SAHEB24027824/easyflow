@@ -12,6 +12,7 @@ $(document).ready(function(){
         let token =$('#token');
         sessionId.val('');
         token.val('');
+        editor.setValue({});
     })
 })
 
