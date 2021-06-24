@@ -173,7 +173,10 @@ function POST_PNF_DATA(e){
 }
 
 
+
 function GET_ACTIVATION_DATA(e){
+   
+    form.innerHTML="";
     e.target.firstChild.classList.remove("displayNone");
     try {
         fetch(`${baseURL}/getActivation/${sessionID.value}/${flowType.value}`,{
@@ -185,12 +188,17 @@ function GET_ACTIVATION_DATA(e){
         })
         .then(res => res.json())
         .then(json =>{
+
             if(json){
                 e.target.firstChild.classList.add("displayNone");
                 postActivation.style.display="block";
                 activationPOSTdata=json;
-                createFormForSKUANDICCID(activationPOSTdata.OrderActivationInfo.AccountLines.length);
+                 if(activationPOSTdata.OrderActivationInfo && activationPOSTdata.OrderActivationInfo.length){
+                    activationPOSTdata.OrderActivationInfo.forEach((order , index)=>{
+                         createFormForSKUANDICCID(order.AccountLines.length , index+1 );
 
+                    })
+                 }
                 editor.setValue(JSON.stringify(json, null, "\t"));
             }
 
@@ -240,8 +248,8 @@ function POST_ACTIVATION_DATA(e){
 
 }
 
-function createFormForSKUANDICCID(lineCount){
-    form.innerHTML="";
+function createFormForSKUANDICCID(lineCount , orderCount){
+
     for(let i=1;i<=lineCount ; i++){
     let div=document.createElement('div');
     div.className="input-group mb-3";
@@ -249,34 +257,42 @@ function createFormForSKUANDICCID(lineCount){
     let device=document.createElement('input');
     device.type="text";
     device.id=i;
-    device.name="device";
+    device.name=`device${orderCount}`;
     device.className="form-control";
-    device.placeholder=`${i} - Device`;
+    device.placeholder=`Order - ${orderCount} - Line - ${i} - Device`;
     let iccid=document.createElement('input');
     iccid.type="text";
     iccid.className="form-control";
-    iccid.name="iccid";
+    iccid.name=`iccid${orderCount}`;
     iccid.id=i;
-    iccid.placeholder=`${i} - ICCID`;
+    iccid.placeholder=`Order - ${orderCount} - Line - ${i} - ICCID`;
     div.appendChild(device);
     div.appendChild(iccid);
     form.appendChild(div);
     }
+
+
+
 }
 
 form.addEventListener('keyup',(e)=>{
-    if(activationPOSTdata.OrderActivationInfo.AccountLines){
-        activationPOSTdata.OrderActivationInfo.AccountLines.forEach(line=>{
-           if(line && line.Line && line.Line.Id){
-               if(e.target.id == line.Line.Id){
-                  if(e.target.name == "device"){
-                    line.Line.Device.DeviceSerialNumber=e.target.value;
-                  }
-                  if(e.target.name == "iccid"){
-                    line.Line.Sim.DeviceSerialNumber=e.target.value
-                  } 
-               }
-           }
+    if(activationPOSTdata.OrderActivationInfo && activationPOSTdata.OrderActivationInfo.length>0){
+        activationPOSTdata.OrderActivationInfo.forEach((order,index)=>{
+
+            if(order.AccountLines){
+                order.AccountLines.forEach(line=>{
+                   if(line && line.Line && line.Line.Id){
+                       if(e.target.id == line.Line.Id){
+                          if(e.target.name == `device${index+1}`){
+                            line.Line.Device.DeviceSerialNumber=e.target.value;
+                          }
+                          if(e.target.name == `iccid${index+1}`){
+                            line.Line.Sim.DeviceSerialNumber=e.target.value
+                          } 
+                       }
+                   }
+                })
+            }
         })
     }
     editor.setValue(JSON.stringify(activationPOSTdata, null, "\t"));
