@@ -82,6 +82,9 @@ function setActivationData(arrayData) {
             if (order.Payment) {
                 orderDetaildObj.Payment = order.Payment
             }
+            if (order.NonCarrierFeatureList) {
+                orderDetaildObj.NonCarrierFeatureList = NonCarrierFeatureList
+            }
 
             activationArrayData.push(orderDetaildObj);
         })
@@ -89,6 +92,7 @@ function setActivationData(arrayData) {
         return activationArrayData;
     }
 }
+
 
 function prepareActJSON(data, sessionId) {
     let resData = {
