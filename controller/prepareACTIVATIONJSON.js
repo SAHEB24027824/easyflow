@@ -87,6 +87,7 @@ function setActivationData(arrayData) {
             }
 
             activationArrayData.push(orderDetaildObj);
+            orderDetaildObj={};
         })
 
         return activationArrayData;

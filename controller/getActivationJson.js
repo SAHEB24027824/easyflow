@@ -19,7 +19,7 @@ function getActivationJson(req,res){
 
         if(!sessionId || !flow) return res.status(400).send("Please send sessionID and Token as URL params"); 
         if(req.headers && !req.headers.authorization)return res.status(401).send("Please send the token"); 
-        fetch(`${flow}/api/PlanFeaturesEnd?SessionId=${sessionId}&subSessionId=1`,{
+        fetch(`${flow}/api/PlanFeaturesEnd?SessionId=${sessionId}`,{
             headers: { 
                 'Content-Type': 'application/json',
                 "Authorization":`${req.headers.authorization}`
@@ -29,7 +29,6 @@ function getActivationJson(req,res){
         .then(json =>{
             if(json){
                 let data= prepareActJSON(json,sessionId);
-                console.log(data)
                  res.status(200).send(data);
             }
             else{
