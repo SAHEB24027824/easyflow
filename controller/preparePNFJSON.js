@@ -2,10 +2,10 @@ let Device = {
     "Id": "1",
     "Type": "4GE",
     "Make": "Apple",
-    "Model": "Apple iPhone 11",
-    "ProductSku": "MWKM2LL/A",
-    "DisplayName": "Apple iPhone 11 256GB Product RED (Verizon)",
-    "SystemName": "Apple iPhone 11 256GB Product RED (Verizon)",
+    "Model": "Apple iPhone pro 11 ",
+    "ProductSku": "MWAM2LL/A",
+    "DisplayName": "Apple iPhone pro 11  256GB Product RED (Verizon)",
+    "SystemName": "Apple iPhone pro 11  256GB Product RED (Verizon)",
     "Action": "ADD",
     "Quantity": 1,
     "PlanFeatureSetup": "CONFIGURE",
@@ -90,16 +90,24 @@ let Sim = {
 
 
 
-function preapareData(arrayData){
+function preapareData(arrayData) {
 
-    let PlanFeaturesStartData=[];
-    
-    if(Array.isArray(arrayData)){
-        arrayData.forEach(order=>{
+    let PlanFeaturesStartData = [];
+
+    if (Array.isArray(arrayData)) {
+        arrayData.forEach(order => {
             if (order && order.AccountLines) {
                 order.AccountLines.forEach(line => {
-                        line.Line.Device=Device
+                    if (line.Line.Device) {
+                    }
+                    else {
+                        line.Line.Device = Device
+                    }
+                    if (line.Line.Sim) {
+                    }
+                    else {
                         line.Line.Sim = Sim
+                    }
                 })
             }
             PlanFeaturesStartData.push(order);
@@ -113,18 +121,18 @@ function preapareData(arrayData){
 function postPNF(data) {
     console.log(data)
 
-    let PlanFeaturesStartData=preapareData(data.CarrierData);
+    let PlanFeaturesStartData = preapareData(data.CarrierData);
     console.log()
 
     // data.CarrierData=
-    let resData={
-        "PlanFeaturesStartData":PlanFeaturesStartData,
+    let resData = {
+        "PlanFeaturesStartData": PlanFeaturesStartData,
         "ReferenceIdentifier": null
     }
 
-    return  resData;
+    return resData;
 }
 
-module.exports=postPNF;
+module.exports = postPNF;
 
 
