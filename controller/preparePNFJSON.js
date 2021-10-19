@@ -98,12 +98,12 @@ function preapareData(arrayData) {
         arrayData.forEach(order => {
             if (order && order.AccountLines) {
                 order.AccountLines.forEach(line => {
-                    if (line.Line.Device) {
+                    if (line.Line.Device.ProductSku && line.Line.Device.Id) {
                     }
                     else {
                         line.Line.Device = Device
                     }
-                    if (line.Line.Sim) {
+                    if (line.Line.Sim.ProductSku && line.Line.Sim.Id) {
                     }
                     else {
                         line.Line.Sim = Sim
