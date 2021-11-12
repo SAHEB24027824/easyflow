@@ -72,6 +72,7 @@ let VZWTCLink=document.querySelector("#VZWTCLink");
 let ACTIVATIONLink=document.querySelector("#ACTIVATIONLink");
 let ACTIVATIONLink1=document.querySelector("#ACTIVATIONLink1");
 let ACTIVATIONLink2=document.querySelector("#ACTIVATIONLink2");
+let ACTIVATIONLink3=document.querySelector("#ACTIVATIONLink3");
 let flowType = document.querySelector('.flowType');
 
 pnfPOSTBTN.style.display="none";
@@ -83,6 +84,7 @@ PNFLink.style.display="none";
 ACTIVATIONLink.style.display="none";
 ACTIVATIONLink1.style.display="none";
 ACTIVATIONLink2.style.display="none";
+ACTIVATIONLink3.style.display="none";
 VZWTCLink.style.display="none";
 
 
@@ -234,6 +236,7 @@ function POST_ACTIVATION_DATA(e){
                 ACTIVATIONLink.style.display="inherit";
                 ACTIVATIONLink1.style.display="inherit";
                 ACTIVATIONLink2.style.display="inherit";
+                ACTIVATIONLink3.style.display="inherit";
                 editor.setValue(JSON.stringify(json, null, "\t"));
             }
 
@@ -326,7 +329,11 @@ function openLink(flow){
         setflow="ACTIVATION";
         param="&dFillType=DAY2"
     }
-    let url = `http://localhost:4200/?sessionID=${id}&journeyType=${setflow}&carrier=VERIZON${param}`;
+    if(flow == 'ACTIVATION-RESTART'){
+        setflow="ACTIVATION";
+        param="&restart=true"
+    }
+    let url = `http://localhost:4200/?sessionID=${id}&journeyType=${setflow}${param}`;
     window.open(url, '_blank');
 }
 }
