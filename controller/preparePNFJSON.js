@@ -1,4 +1,42 @@
-let Device = {
+let DeviceATT={
+    "Id": "14577",
+    "Type": "phone",
+    "Make": "Apple",
+    "Model": "iPhone 12 64GB",
+    "ProductSku": "6859C",
+    "DisplayName": "Apple iPhone 12",
+    "SystemName": "Apple iPhone 12",
+    "Action": "Apple iPhone 12",
+    "Quantity": 1,
+    "PlanFeatureSetup": "CONFIGURE",
+    "Price": {
+        "Amount": 799.99,
+        "MSRP": 799.99,
+        "CurrencyType": "USD",
+        "EstimatedTax": 50.0,
+        "Total": 799.99
+    },
+    "DeviceSerialNumber": "350342020000004",
+    "DevicePaymentOption": "OUTRIGHT",
+    "Promotions": {
+        "Promotion": {
+            "PromoCode": null,
+            "PromoDesc": null,
+            "PromoValue": 0.0,
+            "PromoPercentage": null
+        }
+    },
+    "CarrierData": {
+        "ATT": {
+            "Fees": {
+                "ActivationFee": "0.00",
+                "UpgradeFee": "0.00",
+                "DeviceAccessCharge": "0.00"
+            }
+        }
+    }
+}
+let DeviceVzw = {
     "Id": "1",
     "Type": "4GE",
     "Make": "Apple",
@@ -101,7 +139,11 @@ function preapareData(arrayData) {
                     if (line.Line.Device.ProductSku && line.Line.Device.Id) {
                     }
                     else {
-                        line.Line.Device = Device
+                        if(order.OrderDetails && order.OrderDetails.Carrier && order.OrderDetails.Carrier == 'ATT'){
+                            line.Line.Device = DeviceATT
+                        }else{
+                            line.Line.Device = DeviceVzw
+                        }
                     }
                     if (line.Line.Sim.ProductSku && line.Line.Sim.Id) {
                     }
@@ -119,10 +161,9 @@ function preapareData(arrayData) {
 
 
 function postPNF(data) {
-    console.log(data)
 
     let PlanFeaturesStartData = preapareData(data.CarrierData);
-    console.log()
+
 
     // data.CarrierData=
     let resData = {
