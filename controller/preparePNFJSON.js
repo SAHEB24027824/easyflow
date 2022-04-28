@@ -122,7 +122,9 @@ let Sim = {
         "PaymentType": "OneTime"
     },
     "DeviceSerialNumber": "",
-    "CarrierData": {}
+    "CarrierData": {},
+    "SIMType": null,
+    "EID": null
 }
 
 
